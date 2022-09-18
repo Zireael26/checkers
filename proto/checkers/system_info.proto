@@ -1,0 +1,9 @@
+syntax = "proto3";
+package zireael26.checkers.checkers;
+
+option go_package = "github.com/Zireael26/checkers/x/checkers/types";
+
+message SystemInfo {
+  uint64 nextId = 1; 
+  
+}
