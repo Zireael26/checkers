@@ -73450,6 +73450,11 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  zireael26.checkers.checkers.MsgCreateGameResponse:
+    type: object
+    properties:
+      gameIndex:
+        type: string
   zireael26.checkers.checkers.Params:
     type: object
     description: Params defines the parameters for the module.
