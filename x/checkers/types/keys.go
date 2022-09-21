@@ -22,6 +22,7 @@ const (
 	SystemInfoKey = "SystemInfo/value/"
 )
 
+// Keys for create game event
 const (
 	GameCreatedEventType      = "new-game-created" // Indicates what event type to listen to
 	GameCreatedEventCreator   = "creator"          // Subsidiary information
@@ -30,6 +31,7 @@ const (
 	GameCreatedEventRed       = "red"              // Is it relevant to me?
 )
 
+// Keys for make move event
 const (
 	MovePlayedEventType      = "move-played"
 	MovePlayedEventCreator   = "creator"
@@ -37,4 +39,11 @@ const (
 	MovePlayedEventCapturedX = "captured-x"
 	MovePlayedEventCapturedY = "captured-y"
 	MovePlayedEventWinner    = "winner"
+)
+
+// Keys for reject game event
+const (
+	GameRejectedEventType      = "game-rejected"
+	GameRejectedEventCreator   = "creator"
+	GameRejectedEventGameIndex = "game-index"
 )
