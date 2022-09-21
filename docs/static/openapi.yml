@@ -73466,6 +73466,8 @@ definitions:
         format: int32
       winner:
         type: string
+  zireael26.checkers.checkers.MsgRejectGameResponse:
+    type: object
   zireael26.checkers.checkers.Params:
     type: object
     description: Params defines the parameters for the module.

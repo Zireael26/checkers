@@ -22,11 +22,12 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 	// Create the game
 	newGame := rules.New()
 	storedGame := types.StoredGame{
-		Index: newIndex,
-		Board: newGame.String(),
-		Red:   msg.Red,
-		Black: msg.Black,
-		Turn:  rules.PieceStrings[newGame.Turn],
+		Index:     newIndex,
+		Board:     newGame.String(),
+		Red:       msg.Red,
+		Black:     msg.Black,
+		Turn:      rules.PieceStrings[newGame.Turn],
+		MoveCount: 0,
 	}
 
 	// Validate the created game
