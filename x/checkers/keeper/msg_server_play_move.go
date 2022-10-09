@@ -56,6 +56,7 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 	k.Keeper.SendToFifoTail(ctx, &storedGame, &systemInfo)
 
 	storedGame.MoveCount++
+	storedGame.Deadline = types.FormatDeadline(types.GetNextDeadline(ctx))
 
 	// Store SystemInfo with new FIFO info
 	k.Keeper.SetSystemInfo(ctx, systemInfo)
