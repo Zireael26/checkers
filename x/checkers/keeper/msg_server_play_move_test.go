@@ -57,18 +57,22 @@ func TestPlayMoveSavedGame(t *testing.T) {
 	systemInfo, found := keeper.GetSystemInfo(ctx)
 	require.True(t, found)
 	require.EqualValues(t, types.SystemInfo{
-		NextId: 2,
+		NextId:        2,
+		FifoHeadIndex: "1",
+		FifoTailIndex: "1",
 	}, systemInfo)
 
 	game1, found := keeper.GetStoredGame(ctx, "1")
 	require.True(t, found)
 	require.EqualValues(t, types.StoredGame{
-		Index:     "1",
-		Black:     bob,
-		Red:       carol,
-		Turn:      "r",
-		Board:     "*b*b*b*b|b*b*b*b*|***b*b*b|**b*****|********|r*r*r*r*|*r*r*r*r|r*r*r*r*",
-		MoveCount: 1,
+		Index:       "1",
+		Black:       bob,
+		Red:         carol,
+		Turn:        "r",
+		Board:       "*b*b*b*b|b*b*b*b*|***b*b*b|**b*****|********|r*r*r*r*|*r*r*r*r|r*r*r*r*",
+		MoveCount:   1,
+		BeforeIndex: "-1",
+		AfterIndex:  "-1",
 	}, game1)
 }
 
@@ -162,17 +166,21 @@ func TestPlayMove2SavedGame(t *testing.T) {
 	systemInfo, found := keeper.GetSystemInfo(ctx)
 	require.True(t, found)
 	require.EqualValues(t, types.SystemInfo{
-		NextId: 2,
+		NextId:        2,
+		FifoHeadIndex: "1",
+		FifoTailIndex: "1",
 	}, systemInfo)
 	game1, found := keeper.GetStoredGame(ctx, "1")
 	require.True(t, found)
 	require.EqualValues(t, types.StoredGame{
-		Index:     "1",
-		Board:     "*b*b*b*b|b*b*b*b*|***b*b*b|**b*****|*r******|**r*r*r*|*r*r*r*r|r*r*r*r*",
-		Turn:      "b",
-		Black:     bob,
-		Red:       carol,
-		MoveCount: 2,
+		Index:       "1",
+		Board:       "*b*b*b*b|b*b*b*b*|***b*b*b|**b*****|*r******|**r*r*r*|*r*r*r*r|r*r*r*r*",
+		Turn:        "b",
+		Black:       bob,
+		Red:         carol,
+		MoveCount:   2,
+		BeforeIndex: "-1",
+		AfterIndex:  "-1",
 	}, game1)
 }
 
@@ -240,17 +248,21 @@ func TestPlayMove3SavedGame(t *testing.T) {
 	systemInfo, found := keeper.GetSystemInfo(ctx)
 	require.True(t, found)
 	require.EqualValues(t, types.SystemInfo{
-		NextId: 2,
+		NextId:        2,
+		FifoHeadIndex: "1",
+		FifoTailIndex: "1",
 	}, systemInfo)
 	game1, found := keeper.GetStoredGame(ctx, "1")
 	require.True(t, found)
 	require.EqualValues(t, types.StoredGame{
-		Index:     "1",
-		Board:     "*b*b*b*b|b*b*b*b*|***b*b*b|********|********|b*r*r*r*|*r*r*r*r|r*r*r*r*",
-		Turn:      "r",
-		Black:     bob,
-		Red:       carol,
-		MoveCount: 3,
+		Index:       "1",
+		Board:       "*b*b*b*b|b*b*b*b*|***b*b*b|********|********|b*r*r*r*|*r*r*r*r|r*r*r*r*",
+		Turn:        "r",
+		Black:       bob,
+		Red:         carol,
+		MoveCount:   3,
+		BeforeIndex: "-1",
+		AfterIndex:  "-1",
 	}, game1)
 }
 

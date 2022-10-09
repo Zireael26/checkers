@@ -47,7 +47,19 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		return nil, sdkerrors.Wrapf(types.ErrWrongMove, moveErr.Error())
 	}
 
+	// Get SystemInfo for FIFO
+	systemInfo, found := k.Keeper.GetSystemInfo(ctx)
+	if !found {
+		panic("SystemInfo not found")
+	}
+	// Set game to FIFO Tail
+	k.Keeper.SendToFifoTail(ctx, &storedGame, &systemInfo)
+
 	storedGame.MoveCount++
+
+	// Store SystemInfo with new FIFO info
+	k.Keeper.SetSystemInfo(ctx, systemInfo)
+
 	storedGame.Board = game.String()
 	storedGame.Turn = rules.PieceStrings[game.Turn]
 	k.Keeper.SetStoredGame(ctx, storedGame)

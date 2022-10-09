@@ -22,12 +22,14 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 	// Create the game
 	newGame := rules.New()
 	storedGame := types.StoredGame{
-		Index:     newIndex,
-		Board:     newGame.String(),
-		Red:       msg.Red,
-		Black:     msg.Black,
-		Turn:      rules.PieceStrings[newGame.Turn],
-		MoveCount: 0,
+		Index:       newIndex,
+		Board:       newGame.String(),
+		Red:         msg.Red,
+		Black:       msg.Black,
+		Turn:        rules.PieceStrings[newGame.Turn],
+		MoveCount:   0,
+		BeforeIndex: types.NoFifoIndex,
+		AfterIndex:  types.NoFifoIndex,
 	}
 
 	// Validate the created game
@@ -35,6 +37,9 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 	if err != nil {
 		return nil, err
 	}
+
+	// Set game to FIFO Tail
+	k.Keeper.SendToFifoTail(ctx, &storedGame, &systemInfo)
 
 	// Store the game
 	k.Keeper.SetStoredGame(ctx, storedGame)
