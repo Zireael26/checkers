@@ -3,6 +3,7 @@ package keeper
 import (
 	"context"
 
+	"github.com/Zireael26/checkers/x/checkers/rules"
 	"github.com/Zireael26/checkers/x/checkers/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -12,6 +13,10 @@ func (k msgServer) RejectGame(goCtx context.Context, msg *types.MsgRejectGame) (
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	storedGame, found := k.Keeper.GetStoredGame(ctx, msg.GameIndex)
+	if storedGame.Winner != rules.PieceStrings[rules.NO_PLAYER] {
+		return nil, types.ErrGameFinished
+	}
+
 	if !found {
 		return nil, sdkerrors.Wrapf(types.ErrGameNotFound, "%s", msg.GameIndex)
 	}

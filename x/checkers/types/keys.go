@@ -41,6 +41,7 @@ const (
 	MovePlayedEventCapturedX = "captured-x"
 	MovePlayedEventCapturedY = "captured-y"
 	MovePlayedEventWinner    = "winner"
+	MovePlayedEventBoard     = "board"
 )
 
 // Keys for reject game event
